@@ -24,6 +24,7 @@ layout =    [[sg.Text("Starting Location: ")],
             [sg.Text(size=(80,1), key='-FUELLTR-')],
             [sg.Text(size=(80,1), key='-FUELGAL-')],
             [sg.Text(size=(80,1), key='-BORDER2-')],
+            [sg.Text(size=(80,30), key='-ROUTE-')],
             [sg.Text(size=(80,1), key='-ERROR CODE: 402-')],
             [sg.Text(size=(80,1), key='-ERROR CODE: 611-')],
             [sg.Text(size=(80,1), key='-ERROR CODE: ETC1-')],
@@ -81,11 +82,16 @@ while True:
         window['-FUELGAL-'].update("Fuel Used (Gal): " + str ("{:.2f}".format((json_data["route"]["fuelUsed"]))))
         window['-BORDER2-'].update('==============================================')
 
-        # Very hard
-        # Cannot do
+        # Prints the route to take to get to the destination from the starting location.
+        route2 = " "
         for each in json_data["route"]["legs"][0]["maneuvers"]:
             print ((each["narrative"]) + " (" + str ("{:.2f}".format ((each["distance"])*1.61) + " km) "))
+            route = (each["narrative"]) + " (" + str ("{:.2f}".format ((each["distance"])*1.61) + " km) ")
+            route2 = (route2 + "\n" + route)
+            window['-ROUTE-'].update(route2)
         print ("==============================================\n")
+            
+
     elif json_status == 402:
         # Prints the output to the terminal.
         # Used for debugging purposes.
