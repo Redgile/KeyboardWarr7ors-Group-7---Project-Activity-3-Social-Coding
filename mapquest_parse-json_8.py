@@ -36,60 +36,88 @@ window = sg.Window('KeyboardWarr7ors', layout)
 # Displaying and interacting with the window
 while True:
     event, values = window.read()
-    # Checks if user wants to quit or if window was closed
+
+    # Checks if user wants to quit or if window was closed.
     if event == sg.WINDOW_CLOSED or event == 'Quit':
         break
-    # Outputs the result on the window
+
+    # Passes the input from the GUI to the variable to 
+    # be used by the terminal output display.
     orig = values['-INPUT1-']
+    # Exits the program if a user enters 'quit' or 'q' on the GUI.
     if orig == "quit" or orig == "q":
         break
+    # Passes the input from the GUI to the variable to 
+    # be used by the terminal output display.
     dest = values['-INPUT2-']
+    # Exits the program if a user enters 'quit' or 'q' on the GUI.
     if dest == "quit" or dest == "q":
         break
+
+    # Creates the curl to be used to retrieve the data from a website.
     url = main_api + urllib.parse.urlencode ({"key":key, "from":orig, "to":dest})
     json_data = requests.get(url).json()
     json_status = json_data["info"]["statuscode"]
+
     if json_status == 0:
+        # Prints the output to the terminal.
+        # Used for debugging purposes.
         print ("API Status: " + str(json_status) + " = A successful route class. \n")
-        window['-API STATUS-'].update('API Status: ' + str(json_status) + " = A successful route class.")
         print ("==============================================")
-        window['-BORDER-'].update('==============================================')
         print ("Directions from " + (orig) + " to " + (dest))
-        window['-LOCATIONS-'].update('Directions from ' + values['-INPUT1-'] + ' to ' + values['-INPUT2-'])
         print ("Trip Duration: " + (json_data["route"]["formattedTime"]))
-        window['-DURATION-'].update("Trip Duration: " + (json_data["route"]["formattedTime"]))
         print ("Kilometers: " + str ("{:.2f}".format((json_data["route"]["distance"])*1.61)))
+        print ("Fuel Used (Ltr): " + str ("{:.2f}".format((json_data["route"]["fuelUsed"])*3.78)))
+        print ("==============================================")
+
+        # Prints the output to the GUI.
+        window['-API STATUS-'].update('API Status: ' + str(json_status) + " = A successful route class.")
+        window['-BORDER-'].update('==============================================')
+        window['-LOCATIONS-'].update('Directions from ' + values['-INPUT1-'] + ' to ' + values['-INPUT2-'])
+        window['-DURATION-'].update("Trip Duration: " + (json_data["route"]["formattedTime"]))
         window['-DISTANCEKM-'].update("Distance (km): " + str ("{:.2f}".format((json_data["route"]["distance"])*1.61)))
         window['-DISTANCEMI-'].update("Distance (mi): " + str ("{:.2f}".format((json_data["route"]["distance"]))))
-        print ("Fuel Used (Ltr): " + str ("{:.2f}".format((json_data["route"]["fuelUsed"])*3.78)))
         window['-FUELLTR-'].update("Fuel Used (Ltr): " + str ("{:.2f}".format((json_data["route"]["fuelUsed"])*3.78)))
         window['-FUELGAL-'].update("Fuel Used (Gal): " + str ("{:.2f}".format((json_data["route"]["fuelUsed"]))))
-        print ("==============================================")
         window['-BORDER2-'].update('==============================================')
+
         # Very hard
         # Cannot do
         for each in json_data["route"]["legs"][0]["maneuvers"]:
             print ((each["narrative"]) + " (" + str ("{:.2f}".format ((each["distance"])*1.61) + " km) "))
         print ("==============================================\n")
     elif json_status == 402:
+        # Prints the output to the terminal.
+        # Used for debugging purposes.
         print ("**********************************************")
         print ("Status Code: " + str (json_status) + "; Invalid user inputs for one or both locations.")
-        window['-ERROR CODE: 402-'].update("Status Code: " + str (json_status) + "; Invalid user inputs for one or both locations.")
         print ("**********************************************\n")
+
+        # Prints the output to the GUI.
+        window['-ERROR CODE: 402-'].update("Status Code: " + str (json_status) + "; Invalid user inputs for one or both locations.")
+        
     elif json_status == 611:
+        # Prints the output to the terminal.
+        # Used for debugging purposes.
         print ("**********************************************")
         print ("Status Code: " + str (json_status) + "; Missing an entry for one or both locations.")
-        window['-ERROR CODE: 611-'].update("Status Code: " + str (json_status) + "; Missing an entry for one or both locations.")
         print ("**********************************************\n")
+
+        # Prints the output to the GUI.
+        window['-ERROR CODE: 611-'].update("Status Code: " + str (json_status) + "; Missing an entry for one or both locations.")
+        
     else:
+        # Prints the output to the terminal.
+        # Used for debugging purposes.
         print ("**********************************************")
         print ("Status Code: " + str (json_status) + "; Refer to: ")
         print ("https://developer.mapquest.com/documentation/directions-api/status-codes")
+        print ("**********************************************\n") 
+
+        # Prints the output to the GUI.
         window['-ERROR CODE: ETC1-'].update("Status Code: " + str (json_status) + "; Refer to: ")
         window['-ERROR CODE: ETC2-'].update("https://developer.mapquest.com/documentation/directions-api/status-codes")
-        print ("**********************************************\n")   
-
-
+          
 window.close()
 
 # Leave for reference purposes
