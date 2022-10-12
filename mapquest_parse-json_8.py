@@ -5,8 +5,7 @@ import PySimpleGUI as sg    # Install PySimpleGUi by typing the command:
 # Ito po documentation niya: 
 # https://www.pysimplegui.org/en/latest/call%20reference/
 # Pa-help na lang po, thanks
-# cath try 1
-#sample branch
+
 # API Key
 main_api = "https://www.mapquestapi.com/directions/v2/route?"
 key = "rGUVl7RdGKEVUFAOmTYMkX1pAcfISqaZ"
@@ -14,7 +13,8 @@ key = "rGUVl7RdGKEVUFAOmTYMkX1pAcfISqaZ"
 sg.theme("LightPurple")
 
 # Defining the content of the window
-layout =    [[sg.Text("Starting Location: ")],
+layout =    [#[sg.Column(column1, scrollable=True, vertical_scroll_only=True)],
+            [sg.Text("Starting Location: ")],
             [sg.Input(key='-INPUT1-')],
             [sg.Text("Destination: ")],
             [sg.Input(key='-INPUT2-')],
@@ -22,8 +22,6 @@ layout =    [[sg.Text("Starting Location: ")],
 
 # Creating the window
 window = sg.Window('KeyboardWarr7ors', layout)
-
-sg.theme("LightPurple")
 
 # Displaying and interacting with the window
 while True:
@@ -70,21 +68,22 @@ while True:
         print ("==============================================\n")
 
         # Prints the output to the GUI.
-        sg.popup (
-            'API Status: ' + str(json_status) + " = A successful route class.",
-            '==============================================',
-            'Directions from ' + values['-INPUT1-'] + ' to ' + values['-INPUT2-'],
-            "Trip Duration: " + (json_data["route"]["formattedTime"]),
-            "Distance (km): " + str ("{:.2f}".format((json_data["route"]["distance"])*1.61)),
-            "Distance (mi): " + str ("{:.2f}".format((json_data["route"]["distance"]))),
-            "Fuel Used (Ltr): " + str ("{:.2f}".format((json_data["route"]["fuelUsed"])*3.78)),
-            "Fuel Used (Gal): " + str ("{:.2f}".format((json_data["route"]["fuelUsed"]))),
-            '==============================================',
-            # Prints the route to take to get to the destination from the starting location.
-            route2,
-            "==============================================",
-            title = 'Travel Details'
+        sg.popup_scrolled (
+        'API Status: ' + str(json_status) + " = A successful route class.",
+        '==============================================',
+        'Directions from ' + values['-INPUT1-'] + ' to ' + values['-INPUT2-'],
+        "Trip Duration: " + (json_data["route"]["formattedTime"]),
+        "Distance (km): " + str ("{:.2f}".format((json_data["route"]["distance"])*1.61)),
+        "Distance (mi): " + str ("{:.2f}".format((json_data["route"]["distance"]))),
+        "Fuel Used (Ltr): " + str ("{:.2f}".format((json_data["route"]["fuelUsed"])*3.78)),
+        "Fuel Used (Gal): " + str ("{:.2f}".format((json_data["route"]["fuelUsed"]))),
+        '==============================================',
+        # Prints the route to take to get to the destination from the starting location.
+        route2,
+        "==============================================",
+        title = 'Travel Details'
         )
+        
         
     elif json_status == 402:
         # Prints the output to the terminal.
