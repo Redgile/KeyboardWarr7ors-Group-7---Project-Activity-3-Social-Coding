@@ -81,7 +81,8 @@ while True:
         # Prints the route to take to get to the destination from the starting location.
         route2,
         "==============================================",
-        title = 'Travel Details'
+        title = 'Travel Details',
+        size = (53, 10)
         )
         
         
