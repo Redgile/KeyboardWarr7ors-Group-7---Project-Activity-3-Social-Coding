@@ -11,6 +11,8 @@ import PySimpleGUI as sg    # Install PySimpleGUi by typing the command:
 main_api = "https://www.mapquestapi.com/directions/v2/route?"
 key = "rGUVl7RdGKEVUFAOmTYMkX1pAcfISqaZ"
 
+sg.theme("LightPurple")
+
 # Defining the content of the window
 layout =    [[sg.Text("Starting Location: ")],
             [sg.Input(key='-INPUT1-')],
