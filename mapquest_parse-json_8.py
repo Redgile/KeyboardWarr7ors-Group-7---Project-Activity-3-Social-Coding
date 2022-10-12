@@ -4,7 +4,6 @@ import PySimpleGUI as sg    # Install PySimpleGUi by typing the command:
                             # python3 -m pip install PySimpleGUI
 # Ito po documentation niya: 
 # https://www.pysimplegui.org/en/latest/call%20reference/
-# Pa-help na lang po, thanks
 
 # API Key
 main_api = "https://www.mapquestapi.com/directions/v2/route?"
@@ -14,14 +13,13 @@ key = "rGUVl7RdGKEVUFAOmTYMkX1pAcfISqaZ"
 sg.theme("LightPurple")
 
 # Defining the content of the window
-layout =    [#[sg.Column(column1, scrollable=True, vertical_scroll_only=True)],
-            [sg.Text("Starting Location: ")],
+layout =    [[sg.Text("Starting Location: ")],
             [sg.Input(key='-INPUT1-')],
             [sg.Text("Destination: ")],
             [sg.Input(key='-INPUT2-')],
             [sg.Button('Start'), sg.Button('Quit')]]
 
-# Creating the window
+# Creating the window and the title of the window
 window = sg.Window('KeyboardWarr7ors', layout)
 
 # Displaying and interacting with the window
@@ -60,7 +58,7 @@ while True:
         print ("Kilometers: " + str ("{:.2f}".format((json_data["route"]["distance"])*1.61)))
         print ("Fuel Used (Ltr): " + str ("{:.2f}".format((json_data["route"]["fuelUsed"])*3.78)))
         print ("==============================================")
-
+        #route2 is used to store the route from starting location to destination 
         route2 = " "
         for each in json_data["route"]["legs"][0]["maneuvers"]:
             print ((each["narrative"]) + " (" + str ("{:.2f}".format ((each["distance"])*1.61) + " km) "))
@@ -83,7 +81,9 @@ while True:
         # Prints the route to take to get to the destination from the starting location.
         route2,
         "==============================================",
+        #title of the pop up window
         title = 'Travel Details',
+        #size of the pop up window
         size = (53, 10)
         )
         
