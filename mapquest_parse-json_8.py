@@ -20,7 +20,7 @@ layout =    [#[sg.Column(column1, scrollable=True, vertical_scroll_only=True)],
             [sg.Input(key='-INPUT2-')],
             [sg.Button('Start'), sg.Button('Quit')]]
 
-# Creating the window
+# Creating the GUI window
 window = sg.Window('KeyboardWarr7ors', layout)
 
 # Displaying and interacting with the window
@@ -50,7 +50,7 @@ while True:
     json_status = json_data["info"]["statuscode"]
 
     if json_status == 0:
-        # Prints the output to the terminal.
+        # Prints parsed data from the API to output in the terminal.
         # Used for debugging purposes.
         print ("API Status: " + str(json_status) + " = A successful route class. \n")
         print ("==============================================")
@@ -58,7 +58,7 @@ while True:
         print ("Trip Duration: " + (json_data["route"]["formattedTime"]))
         print ("Kilometers: " + str ("{:.2f}".format((json_data["route"]["distance"])*1.61)))
         print ("Fuel Used (Ltr): " + str ("{:.2f}".format((json_data["route"]["fuelUsed"])*3.78)))
-        print ("==============================================")
+        print ("==============================================") #divison for output clarity and design purposes
 
         route2 = " "
         for each in json_data["route"]["legs"][0]["maneuvers"]:
@@ -67,7 +67,7 @@ while True:
             route2 = (route2 + "\n" + route)
         print ("==============================================\n")
 
-        # Prints the output to the GUI.
+        # Prints the parsed data from the API to output in the GUI.
         sg.popup_scrolled (
         'API Status: ' + str(json_status) + " = A successful route class.",
         '==============================================',
