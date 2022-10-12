@@ -10,6 +10,7 @@ import PySimpleGUI as sg    # Install PySimpleGUi by typing the command:
 main_api = "https://www.mapquestapi.com/directions/v2/route?"
 key = "rGUVl7RdGKEVUFAOmTYMkX1pAcfISqaZ"
 
+# Theme or color of window
 sg.theme("LightPurple")
 
 # Defining the content of the window
@@ -68,6 +69,7 @@ while True:
         print ("==============================================\n")
 
         # Prints the output to the GUI.
+        # Window with scrolling
         sg.popup_scrolled (
         'API Status: ' + str(json_status) + " = A successful route class.",
         '==============================================',
