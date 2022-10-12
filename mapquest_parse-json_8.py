@@ -4,23 +4,26 @@ import PySimpleGUI as sg    # Install PySimpleGUi by typing the command:
                             # python3 -m pip install PySimpleGUI
 # Ito po documentation niya: 
 # https://www.pysimplegui.org/en/latest/call%20reference/
-# Pa-help na lang po, thanks
 
 # API Key
 main_api = "https://www.mapquestapi.com/directions/v2/route?"
 key = "rGUVl7RdGKEVUFAOmTYMkX1pAcfISqaZ"
 
+# Theme or color of window
 sg.theme("LightPurple")
 
 # Defining the content of the window
-layout =    [#[sg.Column(column1, scrollable=True, vertical_scroll_only=True)],
-            [sg.Text("Starting Location: ")],
+layout =    [[sg.Text("Starting Location: ")],
             [sg.Input(key='-INPUT1-')],
             [sg.Text("Destination: ")],
             [sg.Input(key='-INPUT2-')],
             [sg.Button('Start'), sg.Button('Quit')]]
 
+<<<<<<< HEAD
 # Creating the GUI window
+=======
+# Creating the window and the title of the window
+>>>>>>> 1888b988bbd3dbf2647b975ac308cc70d871a6b1
 window = sg.Window('KeyboardWarr7ors', layout)
 
 # Displaying and interacting with the window
@@ -58,8 +61,13 @@ while True:
         print ("Trip Duration: " + (json_data["route"]["formattedTime"]))
         print ("Kilometers: " + str ("{:.2f}".format((json_data["route"]["distance"])*1.61)))
         print ("Fuel Used (Ltr): " + str ("{:.2f}".format((json_data["route"]["fuelUsed"])*3.78)))
+<<<<<<< HEAD
         print ("==============================================") #divison for output clarity and design purposes
 
+=======
+        print ("==============================================")
+        #route2 is used to store the route from starting location to destination 
+>>>>>>> 1888b988bbd3dbf2647b975ac308cc70d871a6b1
         route2 = " "
         for each in json_data["route"]["legs"][0]["maneuvers"]:
             print ((each["narrative"]) + " (" + str ("{:.2f}".format ((each["distance"])*1.61) + " km) "))
@@ -67,7 +75,12 @@ while True:
             route2 = (route2 + "\n" + route)
         print ("==============================================\n")
 
+<<<<<<< HEAD
         # Prints the parsed data from the API to output in the GUI.
+=======
+        # Prints the output to the GUI.
+        # Window with scrolling
+>>>>>>> 1888b988bbd3dbf2647b975ac308cc70d871a6b1
         sg.popup_scrolled (
         'API Status: ' + str(json_status) + " = A successful route class.",
         '==============================================',
@@ -81,7 +94,9 @@ while True:
         # Prints the route to take to get to the destination from the starting location.
         route2,
         "==============================================",
+        #title of the pop up window
         title = 'Travel Details',
+        #size of the pop up window
         size = (53, 10)
         )
         
