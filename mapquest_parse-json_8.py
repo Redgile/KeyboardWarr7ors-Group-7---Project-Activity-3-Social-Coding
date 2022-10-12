@@ -16,24 +16,12 @@ layout =    [[sg.Text("Starting Location: ")],
             [sg.Input(key='-INPUT1-')],
             [sg.Text("Destination: ")],
             [sg.Input(key='-INPUT2-')],
-            [sg.Text(size=(80,1), key='-API STATUS-')],
-            [sg.Text(size=(80,1), key='-BORDER-')],
-            [sg.Text(size=(80,1), key='-LOCATIONS-')],
-            [sg.Text(size=(80,1), key='-DURATION-')],
-            [sg.Text(size=(80,1), key='-DISTANCEKM-')],
-            [sg.Text(size=(80,1), key='-DISTANCEMI-')],
-            [sg.Text(size=(80,1), key='-FUELLTR-')],
-            [sg.Text(size=(80,1), key='-FUELGAL-')],
-            [sg.Text(size=(80,1), key='-BORDER2-')],
-            [sg.Text(size=(80,30), key='-ROUTE-')],
-            [sg.Text(size=(80,1), key='-ERROR CODE: 402-')],
-            [sg.Text(size=(80,1), key='-ERROR CODE: 611-')],
-            [sg.Text(size=(80,1), key='-ERROR CODE: ETC1-')],
-            [sg.Text(size=(80,1), key='-ERROR CODE: ETC2-')],
-            [sg.Button('Start'), sg.Button('Reset'), sg.Button('Quit')]]
+            [sg.Button('Start'), sg.Button('Quit')]]
 
 # Creating the window
 window = sg.Window('KeyboardWarr7ors', layout)
+
+sg.theme("LightPurple")
 
 # Displaying and interacting with the window
 while True:
@@ -72,27 +60,30 @@ while True:
         print ("Fuel Used (Ltr): " + str ("{:.2f}".format((json_data["route"]["fuelUsed"])*3.78)))
         print ("==============================================")
 
-        # Prints the output to the GUI.
-        window['-API STATUS-'].update('API Status: ' + str(json_status) + " = A successful route class.")
-        window['-BORDER-'].update('==============================================')
-        window['-LOCATIONS-'].update('Directions from ' + values['-INPUT1-'] + ' to ' + values['-INPUT2-'])
-        window['-DURATION-'].update("Trip Duration: " + (json_data["route"]["formattedTime"]))
-        window['-DISTANCEKM-'].update("Distance (km): " + str ("{:.2f}".format((json_data["route"]["distance"])*1.61)))
-        window['-DISTANCEMI-'].update("Distance (mi): " + str ("{:.2f}".format((json_data["route"]["distance"]))))
-        window['-FUELLTR-'].update("Fuel Used (Ltr): " + str ("{:.2f}".format((json_data["route"]["fuelUsed"])*3.78)))
-        window['-FUELGAL-'].update("Fuel Used (Gal): " + str ("{:.2f}".format((json_data["route"]["fuelUsed"]))))
-        window['-BORDER2-'].update('==============================================')
-
-        # Prints the route to take to get to the destination from the starting location.
         route2 = " "
         for each in json_data["route"]["legs"][0]["maneuvers"]:
             print ((each["narrative"]) + " (" + str ("{:.2f}".format ((each["distance"])*1.61) + " km) "))
             route = (each["narrative"]) + " (" + str ("{:.2f}".format ((each["distance"])*1.61) + " km) ")
             route2 = (route2 + "\n" + route)
-            window['-ROUTE-'].update(route2)
         print ("==============================================\n")
-            
 
+        # Prints the output to the GUI.
+        sg.popup (
+            'API Status: ' + str(json_status) + " = A successful route class.",
+            '==============================================',
+            'Directions from ' + values['-INPUT1-'] + ' to ' + values['-INPUT2-'],
+            "Trip Duration: " + (json_data["route"]["formattedTime"]),
+            "Distance (km): " + str ("{:.2f}".format((json_data["route"]["distance"])*1.61)),
+            "Distance (mi): " + str ("{:.2f}".format((json_data["route"]["distance"]))),
+            "Fuel Used (Ltr): " + str ("{:.2f}".format((json_data["route"]["fuelUsed"])*3.78)),
+            "Fuel Used (Gal): " + str ("{:.2f}".format((json_data["route"]["fuelUsed"]))),
+            '==============================================',
+            # Prints the route to take to get to the destination from the starting location.
+            route2,
+            "==============================================",
+            title = 'Travel Details'
+        )
+        
     elif json_status == 402:
         # Prints the output to the terminal.
         # Used for debugging purposes.
@@ -101,7 +92,8 @@ while True:
         print ("**********************************************\n")
 
         # Prints the output to the GUI.
-        window['-ERROR CODE: 402-'].update("Status Code: " + str (json_status) + "; Invalid user inputs for one or both locations.")
+        sg.popup ("Status Code: " + str (json_status) + "; Invalid user inputs for one or both locations.",
+        title = "Error Code: 402")
         
     elif json_status == 611:
         # Prints the output to the terminal.
@@ -111,7 +103,8 @@ while True:
         print ("**********************************************\n")
 
         # Prints the output to the GUI.
-        window['-ERROR CODE: 611-'].update("Status Code: " + str (json_status) + "; Missing an entry for one or both locations.")
+        sg.popup("Status Code: " + str (json_status) + "; Missing an entry for one or both locations.",
+        title = "Error Code: 611")
         
     else:
         # Prints the output to the terminal.
@@ -122,8 +115,9 @@ while True:
         print ("**********************************************\n") 
 
         # Prints the output to the GUI.
-        window['-ERROR CODE: ETC1-'].update("Status Code: " + str (json_status) + "; Refer to: ")
-        window['-ERROR CODE: ETC2-'].update("https://developer.mapquest.com/documentation/directions-api/status-codes")
+        sg.popup("Status Code: " + str (json_status) + "; Refer to: ",
+        "https://developer.mapquest.com/documentation/directions-api/status-codes",
+        title = 'An Error Has Occured')
           
 window.close()
 
