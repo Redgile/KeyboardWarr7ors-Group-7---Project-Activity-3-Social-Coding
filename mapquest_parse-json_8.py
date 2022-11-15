@@ -1,9 +1,7 @@
 import urllib.parse
 
 import PySimpleGUI as sg  # Install PySimpleGUi by typing the command: python3 -m pip install PySimpleGUI
-
 import requests
-
 
 # Ito po documentation niya:
 # https://www.pysimplegui.org/en/latest/call%20reference/
