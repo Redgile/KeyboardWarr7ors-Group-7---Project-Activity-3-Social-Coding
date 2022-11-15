@@ -1,6 +1,9 @@
 import urllib.parse
-import requests
+
 import PySimpleGUI as sg  # Install PySimpleGUi by typing the command: python3 -m pip install PySimpleGUI
+
+import requests
+
 
 # Ito po documentation niya:
 # https://www.pysimplegui.org/en/latest/call%20reference/
@@ -18,7 +21,7 @@ layout = [
     [sg.Input(key="-INPUT1-")],
     [sg.Text("Destination: ")],
     [sg.Input(key="-INPUT2-")],
-    [sg.Button('Start'), sg.Button("Quit")],
+    [sg.Button("Start"), sg.Button("Quit")],
 ]
 
 # Creating the window and the title of the window
@@ -59,11 +62,11 @@ while True:
         print("Trip Duration: " + (json_data["route"]["formattedTime"]))
         print(
             "Kilometers: "
-            + str ("{:.2f}".format((json_data["route"]["distance"]) * 1.61))
+            + str("{:.2f}".format((json_data["route"]["distance"]) * 1.61))
         )
         print(
             "Fuel Used (Ltr): "
-            + str ("{:.2f}".format((json_data["route"]["fuelUsed"]) * 3.78))
+            + str("{:.2f}".format((json_data["route"]["fuelUsed"]) * 3.78))
         )
         print("==============================================")
         
@@ -73,12 +76,12 @@ while True:
             print(
                 (each["narrative"])
                 + " ("
-                + str ("{:.2f}".format ((each["distance"]) * 1.61) + " km) ")
+                + str("{:.2f}".format((each["distance"]) * 1.61) + " km) ")
             )
             route = (
                 (each["narrative"])
                 + " ("
-                + str ("{:.2f}".format ((each["distance"]) * 1.61) + " km) ")
+                + str("{:.2f}".format((each["distance"]) * 1.61) + " km) ")
             )
             route2 = route2 + "\n" + route
         print("==============================================\n")
@@ -92,7 +95,7 @@ while True:
             "Trip Duration: " + (json_data["route"]["formattedTime"]),
             "Distance (km): "
             + str("{:.2f}".format((json_data["route"]["distance"]) * 1.61)),
-            "Distance (mi): " + str ("{:.2f}".format((json_data["route"]["distance"]))),
+            "Distance (mi): " + str("{:.2f}".format((json_data["route"]["distance"]))),
             "Fuel Used (Ltr): "
             + str("{:.2f}".format((json_data["route"]["fuelUsed"]) * 3.78)),
             "Fuel Used (Gal): "
@@ -142,7 +145,7 @@ while True:
             "Status Code: "
             + str(json_status)
             + "; Missing an entry for one or both locations.",
-            title="Error Code: 611"
+            title="Error Code: 611",
         )
         
     else:
@@ -153,7 +156,7 @@ while True:
         print(
             "https://developer.mapquest.com/documentation/directions-api/status-codes"
         )
-        print("**********************************************\n") 
+        print("**********************************************\n")
 
         # Prints the output to the GUI.
         sg.popup(
