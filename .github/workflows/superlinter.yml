@@ -6,11 +6,6 @@ on:
   pull_request:
     branches: [ $default-branch ]
 
-defaults:
-  run:
-    shell: bash
-    working-directory: superlinter
-
 jobs:
   super-lint:
     name: Lint code base
