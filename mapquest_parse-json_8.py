@@ -67,7 +67,7 @@ while True:
             + str("{:.2f}".format((json_data["route"]["fuelUsed"]) * 3.78))
         )
         print("==============================================")
-        
+
         # route2 is used to store the route from starting location to destination
         route2 = " "
         for each in json_data["route"]["legs"][0]["maneuvers"]:
@@ -145,7 +145,7 @@ while True:
             + "; Missing an entry for one or both locations.",
             title="Error Code: 611",
         )
-        
+
     else:
         # Prints the output to the terminal.
         # Used for debugging purposes.
