@@ -62,10 +62,10 @@ while True:
             "Kilometers: "
             + str("{:.2f}".format((json_data["route"]["distance"]) * 1.61))
         )
-        print(
-            "Fuel Used (Ltr): "
-            + str("{:.2f}".format((json_data["route"]["fuelUsed"]) * 3.78))
-        )
+        # print(
+        #    "Fuel Used (Ltr): "
+        #    + str("{:.2f}".format((json_data["route"]["fuelUsed"]) * 3.78))
+        # )
         print("==============================================")
 
         # route2 is used to store the route from starting location to destination
@@ -94,10 +94,10 @@ while True:
             "Distance (km): "
             + str("{:.2f}".format((json_data["route"]["distance"]) * 1.61)),
             "Distance (mi): " + str("{:.2f}".format((json_data["route"]["distance"]))),
-            "Fuel Used (Ltr): "
-            + str("{:.2f}".format((json_data["route"]["fuelUsed"]) * 3.78)),
-            "Fuel Used (Gal): "
-            + str("{:.2f}".format((json_data["route"]["fuelUsed"]))),
+            # "Fuel Used (Ltr): "
+            # + str("{:.2f}".format((json_data["route"]["fuelUsed"]) * 3.78)),
+            # "Fuel Used (Gal): "
+            # + str("{:.2f}".format((json_data["route"]["fuelUsed"]))),
             "==============================================",
             # Prints the route to take to get to the destination from the starting location.
             route2,
