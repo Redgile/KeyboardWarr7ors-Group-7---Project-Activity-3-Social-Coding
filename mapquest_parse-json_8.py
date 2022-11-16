@@ -16,9 +16,13 @@ sg.theme("LightPurple")
 # Defining the content of the window
 layout = [
     [sg.Text("Starting Location: ")],
-    [sg.Input(key="-INPUT1-")],
+    [sg.OptionMenu(['South Caloocan','North Caloocan','Las Piñas','Makati','Malabon','Mandaluyong',
+    'Marikina','Muntinlupa','Navotas','Parañaque','Pasay','Pasig','Pateros','Quezon City',
+    'San Juan','Taguig','Valenzuela'],default_value="Manila",key="-INPUT1-")],
     [sg.Text("Destination: ")],
-    [sg.Input(key="-INPUT2-")],
+    [sg.OptionMenu(['South Caloocan','North Caloocan','Las Piñas','Makati','Malabon','Mandaluyong',
+    'Marikina','Muntinlupa','Navotas','Parañaque','Pasay','Pasig','Pateros','Quezon City',
+    'San Juan','Taguig','Valenzuela'],default_value="Makati",key="-INPUT2-")],
     [sg.Button("Start"), sg.Button("Quit")],
 ]
 
