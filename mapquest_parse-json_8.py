@@ -11,6 +11,10 @@ main_api = "https://www.mapquestapi.com/directions/v2/route?"
 key = "rGUVl7RdGKEVUFAOmTYMkX1pAcfISqaZ"
 
 # Theme or color of window
+
+# Stored font data in a variable 
+helv10 = ('Helvetica', 10, 'bold')
+
 sg.theme("LightPurple")
 
 # Defining the content of the window
@@ -22,12 +26,16 @@ layout = [
     [sg.Text("Destination: ")],
     [sg.OptionMenu(['South Caloocan','North Caloocan','Las Piñas','Makati','Malabon','Mandaluyong',
     'Marikina','Muntinlupa','Navotas','Parañaque','Pasay','Pasig','Pateros','Quezon City',
-    'San Juan','Taguig','Valenzuela'],default_value="Makati",key="-INPUT2-")],
-    [sg.Button("Start"), sg.Button("Quit")],
+    'San Juan','Taguig','Valenzuel#a'],default_value="Makati",key="-INPUT2-")],
+
+    # Utilized Button Class parameters for styling the button 
+    # reference: https://www.pysimplegui.org/en/latest/call%20reference/#button-element 
+    [sg.Button("Start", expand_x=True, mouseover_colors=('#000000', '#2d767f')), 
+    sg.Button("Quit", expand_x=True, mouseover_colors=('#000000', '#2d767f'))],
 ]
 
 # Creating the window and the title of the window
-window = sg.Window("KeyboardWarr7ors", layout)
+window = sg.Window("KeyboardWarr7ors", layout, font=helv10)
 
 # Displaying and interacting with the window
 while True:
