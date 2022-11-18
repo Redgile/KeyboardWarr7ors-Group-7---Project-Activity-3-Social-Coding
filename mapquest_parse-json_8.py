@@ -75,7 +75,7 @@ layout = [
     # reference: https://www.pysimplegui.org/en/latest/call%20reference/#button-element
     [
         sg.Button("Start", expand_x=True, mouseover_colors=("#000000", "#2d767f")),
-        sg.Button("Quit", expand_x=True, mouseover_colors=("#000000", "#2d767f"))
+        sg.Button("Quit", expand_x=True, mouseover_colors=("#000000", "#2d767f")),
     ],
 ]
 
