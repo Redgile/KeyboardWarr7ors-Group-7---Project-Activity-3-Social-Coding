@@ -39,14 +39,14 @@ layout = [
                 "Quezon City",
                 "San Juan",
                 "Taguig",
-                "Valenzuela"
+                "Valenzuela",
             ],
             default_value="Manila",
-            key="-INPUT1-"
+            key="-INPUT1-",
         )
     ],
     [sg.Text("Destination: ")],
-        [
+    [
         sg.OptionMenu(
             [
                 "South Caloocan",
@@ -65,17 +65,17 @@ layout = [
                 "Quezon City",
                 "San Juan",
                 "Taguig",
-                "Valenzuela"
+                "Valenzuela",
             ],
             default_value="Makati",
-            key="-INPUT2-"
+            key="-INPUT2-",
         )
     ],
-    # Utilized Button Class parameters for styling the button 
-    # reference: https://www.pysimplegui.org/en/latest/call%20reference/#button-element 
+    # Utilized Button Class parameters for styling the button
+    # reference: https://www.pysimplegui.org/en/latest/call%20reference/#button-element
     [
-        sg.Button("Start", expand_x=True, mouseover_colors=('#000000', '#2d767f')),
-        sg.Button("Quit", expand_x=True, mouseover_colors=('#000000', '#2d767f'))
+        sg.Button("Start", expand_x=True, mouseover_colors=("#000000", "#2d767f")),
+        sg.Button("Quit", expand_x=True, mouseover_colors=("#000000", "#2d767f"))
     ],
 ]
 
